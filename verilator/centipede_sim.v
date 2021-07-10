@@ -24,9 +24,27 @@ module top(
    input [7:0]  ioctl_dout,
    input [7:0]  ioctl_din,   
    input [7:0]  ioctl_index,
-   output  reg  ioctl_wait=1'b0
+   output  reg  ioctl_wait=1'b0,
    
+   input [3:0] patt_select
 );
+   
+vga vga_inst(
+	.pclk(clk_12),
+	.reset(reset),
+
+	.hs(VGA_HS),
+	.vs(VGA_VS),
+	.vga_r(VGA_R),
+	.vga_g(VGA_G),
+	.vga_b(VGA_B),
+	.VGA_DE(),
+	.hblank(VGA_HB),
+	.vblank(VGA_VB),
+
+	.patt_select(patt_select)
+);
+
    
    // Core inputs/outputs
    wire       pause;
@@ -37,6 +55,7 @@ module top(
    reg [7:0]  joystick/*verilator public_flat*/;
    reg [9:0]  playerinput/*verilator public_flat*/;  
 
+   /*
    // Hardcode default switches
    reg [7:0]  sw1 = { 1'b0, 1'b0,2'b0,2'b0,2'b0 };
    reg [7:0]  sw2 = 8'h02;
@@ -99,5 +118,6 @@ module top(
 		 .hs_write(1'b0),
 		 .hs_access(1'b0)
        );
-   
+*/
+
 endmodule

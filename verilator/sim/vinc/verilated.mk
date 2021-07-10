@@ -9,17 +9,18 @@
 # SPDX-License-Identifier: LGPL-3.0-only OR Artistic-2.0
 ######################################################################
 
-PERL = /usr/bin/perl
-PYTHON3 = /usr/bin/python3
+AR = ar
 CXX = g++
 LINK = g++
-AR = ar
-RANLIB = ranlib
-OBJCACHE ?= ccache
+OBJCACHE ?= 
+PERL = /usr/bin/perl
+PYTHON3 = /usr/bin/python3
 
 CFG_WITH_CCWARN = no
 CFG_WITH_LONGTESTS = no
 
+# Compiler flags to enable profiling
+CFG_CXXFLAGS_PROFILE =  -pg
 # Select newest language
 CFG_CXXFLAGS_STD_NEWEST = -std=gnu++14
 # Select oldest language (for Verilator internal testing only)
@@ -103,6 +104,14 @@ OPT_FAST = -Os
 # files in the run-time library. Normally there should be no need for the user
 # to change this as the library is small, but can have significant speed impact.
 OPT_GLOBAL = -Os
+
+#######################################################################
+##### Profile builds
+
+ifeq ($(VM_PROFC),1)
+  CPPFLAGS += $(CFG_CXXFLAGS_PROFILE)
+  LDFLAGS  += $(CFG_CXXFLAGS_PROFILE)
+endif
 
 #######################################################################
 ##### SystemC builds

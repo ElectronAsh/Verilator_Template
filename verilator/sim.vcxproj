@@ -61,6 +61,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="obj_dir\Vtop__Dpi.cpp" />
+    <ClCompile Include="obj_dir\Vtop__Syms.cpp" />
+    <ClCompile Include="obj_dir\Vtop__Trace.cpp" />
+    <ClCompile Include="obj_dir\Vtop__Trace__Slow.cpp" />
+    <ClCompile Include="obj_dir\Vtop___024root.cpp" />
+    <ClCompile Include="obj_dir\Vtop___024root__Slow.cpp" />
+    <ClCompile Include="sim\vinc\verilated.cpp" />
+    <ClCompile Include="obj_dir\Vtop.cpp" />
     <ClCompile Include="sim\imgui\imgui.cpp" />
     <ClCompile Include="sim\imgui\imgui_draw.cpp" />
     <ClCompile Include="sim\imgui\imgui_impl_dx11.cpp" />
@@ -68,22 +76,16 @@
     <ClCompile Include="sim\imgui\imgui_tables.cpp" />
     <ClCompile Include="sim\imgui\imgui_widgets.cpp" />
     <ClCompile Include="sim\sim_clock.cpp" />
-    <ClCompile Include="sim\vinc\verilated.cpp" />
-    <ClCompile Include="sim\vinc\verilated_save.cpp" />
     <ClCompile Include="sim\sim_bus.cpp" />
     <ClCompile Include="sim\sim_console.cpp" />
     <ClCompile Include="sim\sim_input.cpp" />
     <ClCompile Include="sim\sim_video.cpp" />
-    <ClCompile Include="obj_dir\Vtop.cpp" />
-    <ClCompile Include="obj_dir\Vtop__Dpi.cpp" />
-    <ClCompile Include="obj_dir\Vtop__Syms.cpp" />
-    <ClCompile Include="obj_dir\Vtop__Slow.cpp" />
-    <ClCompile Include="obj_dir\Vtop__Trace.cpp" />
-    <ClCompile Include="obj_dir\Vtop__Trace__Slow.cpp" />
+    <ClCompile Include="sim\vinc\verilated_save.cpp" />
     <ClCompile Include="sim\vinc\verilated_vcd_c.cpp" />
     <ClCompile Include="sim_main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="sim\vinc\verilated.h" />
     <ClInclude Include="sim\imgui\imconfig.h" />
     <ClInclude Include="sim\imgui\imgui.h" />
     <ClInclude Include="sim\imgui\imgui_impl_opengl2.h" />
@@ -94,7 +96,6 @@
     <ClInclude Include="sim\imgui\imstb_textedit.h" />
     <ClInclude Include="sim\imgui\imstb_truetype.h" />
     <ClInclude Include="sim\sim_clock.h" />
-    <ClInclude Include="sim\vinc\verilated.h" />
     <ClInclude Include="sim\sim_bus.h" />
     <ClInclude Include="sim\sim_console.h" />
     <ClInclude Include="sim\sim_input.h" />

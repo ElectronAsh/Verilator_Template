@@ -53,9 +53,9 @@ const int input_pause = 11;
 
 // Video
 // -----
-#define VGA_WIDTH 240
-#define VGA_HEIGHT 257
-#define VGA_ROTATE -1  // 90 degrees anti-clockwise
+#define VGA_WIDTH 400
+#define VGA_HEIGHT 260
+#define VGA_ROTATE 0
 #define VGA_SCALE_X 2.0
 #define VGA_SCALE_Y 2.0
 SimVideo video(VGA_WIDTH, VGA_HEIGHT, VGA_ROTATE);
@@ -63,7 +63,7 @@ SimVideo video(VGA_WIDTH, VGA_HEIGHT, VGA_ROTATE);
 // Simulation control
 // ------------------
 int initialReset = 48;
-bool run_enable = 1;
+bool run_enable = 0;
 int batchSize = 25000000 / 100;
 bool single_step = 0;
 bool multi_step = 0;
@@ -131,8 +131,10 @@ int verilate() {
 		top->clk_48 = clk_48.clk;
 		top->clk_12 = clk_12.clk;
 
+		top->patt_select = 15;	// Select the SMPTE pattern.
+
 		// Output pixels on rising edge of pixel clock
-		if (clk_48.IsRising() && top->top__DOT__ce_pix) {
+		if (clk_12.IsRising() /*&& top->top__DOT__ce_pix*/) {
 			uint32_t colour = 0xFF000000 | top->VGA_B << 16 | top->VGA_G << 8 | top->VGA_R;
 			video.Clock(top->VGA_HB, top->VGA_VB, top->VGA_HS, top->VGA_VS, colour);
 		}
@@ -173,7 +175,7 @@ int main(int argc, char** argv, char** env) {
 
 #ifdef WIN32
 	// Attach debug console to the verilated code
-	Verilated::setDebug(console);
+	//Verilated::setDebug(console);
 #endif
 
 	// Attach bus
@@ -317,10 +319,15 @@ int main(int argc, char** argv, char** env) {
 		ImGui::SliderInt("Rotate", &video.output_rotate, -1, 1); ImGui::SameLine();
 		ImGui::Checkbox("Flip V", &video.output_vflip);
 		ImGui::Text("main_time: %d frame_count: %d sim FPS: %f", main_time, video.count_frame, video.stats_fps);
-		ImGui::Text("pixel: %d line: %d", video.count_pixel, video.count_line);
+		ImGui::Text("pixel: %06d line: %03d", video.count_pixel, video.count_line);
 
 		// Draw VGA output
 		ImGui::Image(video.texture_id, ImVec2(video.output_width * VGA_SCALE_X, video.output_height * VGA_SCALE_Y));
+		ImGui::End();
+
+		ImGui::Begin("Registers");
+		ImGui::Text("VGA_HB %d", top->VGA_HB);
+		ImGui::Text("VGA_VB %d", top->VGA_VB);
 		ImGui::End();
 
 		//ImGui::Begin("RAM Editor");

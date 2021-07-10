@@ -22,4 +22,4 @@
 
 /// Verilator version name, e.g. "1.000 2000-01-01"
 // Autoconf substitutes this with the strings from AC_INIT.
-#define VERILATOR_VERSION "4.204 2021-06-12"
+#define VERILATOR_VERSION "4.210 2021-07-07"
